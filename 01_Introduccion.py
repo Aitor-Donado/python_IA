@@ -71,6 +71,7 @@ del(j)
 
 num = 7
 num = num + 1
+num += 1
 num += 5
 
 # ---------------------------------
@@ -134,7 +135,7 @@ type(cierto)
 letra = "a"
 type(letra)
 palabra = "cañón"
-palabra = 'cañon'
+palabra = 'cañón'
 numero = "12"
 otro_numero = "0.4"
 # ¡Cuidado! No devuelve un error.
@@ -157,3 +158,4 @@ nada = None
 # Va a aparecer cuando cometamos errores
 type(nada)
 
+print(print("Hola"))

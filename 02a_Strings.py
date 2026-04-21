@@ -77,6 +77,7 @@ saludo1[7:0:-2]     # Devuelve las posiciones 7,5,3,1
 saludo1[::3]
 saludo1[::-2]
 
+
 saludo1.islower()
 
 # CONVERTIR EN MAYUSCULAS/MINUSCULAS
