@@ -1,4 +1,5 @@
 from datetime import datetime
+from vehiculos import Coche
 
 class Empleado:
     def __init__(self, nombre, apellido1, apellido2=""):
@@ -50,22 +51,47 @@ class Empleado:
         return sueldo_total
     
 class Directivo(Empleado):
-    pass
+    def __init__(self, nombre, apellido1, apellido2=""):
+        super().__init__(nombre, apellido1, apellido2)
+        self.coche = None
+
+    def asigna_coche(self, marca, modelo, longitud, precio):
+        self.coche = Coche(marca, modelo, longitud, precio)
     
 class Oficinista(Empleado):
-    pass
+    def __init__(self, nombre, apellido1, apellido2=""):
+        super().__init__(nombre, apellido1, apellido2)
+        self.bonus = 0
+
+    def asignar_bonus(self):
+        bonus = input("Añade la candidad para el bonus")
+        self.bonus += float(bonus)
+
+    def calcula_sueldo(self):
+        sueldo_sin_bonus = super().calcula_sueldo()
+        return sueldo_sin_bonus + self.bonus
     
 class Peon(Empleado):
-    pass
+    def __init__(self, nombre, apellido1, apellido2=""):
+        super().__init__(nombre, apellido1, apellido2)
+        self.guardias = 0
 
+    def ficha(self):
+        super().ficha()
+        if self.trabajando and datetime.now().hour > 20:
+            self.guardias +=1
+
+    def calcula_sueldo(self):
+        sueldo_sin_guardias = super().calcula_sueldo()
+        return sueldo_sin_guardias + 20*self.guardias
 
 if __name__ == "__main__":
     import time
     director = Directivo('Juan', 'Pérez', 'López')
     secretario = Oficinista('Juanito', 'Pérez', 'García')
     soldador = Peon("Luis", "Gómez")
-
     ### Pruebas Directivo
+    """
     director.ficha()
     time.sleep(2)
     director.ficha()
@@ -81,8 +107,9 @@ if __name__ == "__main__":
     director.coche.saludar()
 
     print(director.coche)
-
+    """
     ### Pruebas Oficinista
+    """
     secretario.ficha()
     time.sleep(2)
     secretario.ficha()
@@ -97,7 +124,7 @@ if __name__ == "__main__":
     secretario.asignar_bonus()
 
     print("Sueldo:", secretario.calcula_sueldo())
-
+    """
     ### Pruebas Peón soldador
     soldador.ficha()
     time.sleep(2)
@@ -107,7 +134,7 @@ if __name__ == "__main__":
 
     print("Sueldo:", soldador.calcula_sueldo())
     soldador.asigna_sueldo()
-    # soldador.__sueldo_hora = 10000
+
     print("Sueldo:", soldador.calcula_sueldo())
 
     print(soldador.guardias)
